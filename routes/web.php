@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
 });
 
 Route::get('/categories/{category}', [CategoryController::class, 'index'])->name('category_index')->middleware('auth');
+
+Route::post('/like/{postId}',[LikeController::class,'store']);
+Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
